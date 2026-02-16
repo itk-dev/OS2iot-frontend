@@ -31,6 +31,7 @@ export class PermissionTabelComponent implements AfterViewInit {
 
   resultsLength = 0;
   public pageSize = environment.tablePageSize;
+  public errorMessage: string | undefined;
   pageSizeOptions = DefaultPageSizeOptions;
 
   isLoadingResults = true;
@@ -92,6 +93,8 @@ export class PermissionTabelComponent implements AfterViewInit {
         this.permissionService.deletePermission(id).subscribe(response => {
           if (response.ok && response.body.affected > 0) {
             this.refresh();
+          } else if (response.error) {
+            this.errorMessage = response.error.message;
           }
         });
       }

@@ -11,6 +11,11 @@
     >
     </app-top-bar>
     <div class="container-fluid">
+      @if (errorMessage) {
+        <div class="error-messages p-3 jumbotron">
+          <p class="line-break">{{ errorMessage | translate }}</p>
+        </div>
+      }
       <div class="row">
         <div class="col-12">
           <div class="jumbotron">
