@@ -658,6 +658,7 @@
     "NUMBER_OF_MEMBERS": "Antal medlemmer",
     "TYPE": "Type af brugergruppe",
     "NO_ORGANISATION": "N/A",
+    "NO_USER": "Ingen brugere er tilføjet",
     "SAVE": "Gem brugergruppe",
     "DETAIL": {
       "TYPE": "Adgangstype ",
@@ -688,6 +689,9 @@
     "TABLE-ROW": {
       "EDIT": "Rediger",
       "DELETE": "Slet"
+    },
+    "ERRORS": {
+      "DIRTY-DELETE": "Brugergruppen kan ikke nedlægges, da der er tilknyttet applikationer og/eller brugere til brugergruppen.\nFjern de tilknyttede applikationer og brugere for at nedlægge brugergruppen."
     }
   },
   "PERMISSION-TYPE": {

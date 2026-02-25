@@ -47,6 +47,7 @@ export class PermissionDetailComponent implements OnInit, OnChanges {
   dropdownButton: DropdownButton;
   canEdit: boolean;
   showApplicationTable = false;
+  public errorMessage: string | undefined;
 
   constructor(
     public translate: TranslateService,
@@ -89,6 +90,8 @@ export class PermissionDetailComponent implements OnInit, OnChanges {
         this.permissionService.deletePermission(this.id).subscribe(response => {
           if (response.ok && response.body.affected > 0) {
             this.router.navigate(["admin/permissions"]);
+          } else if (response.error) {
+            this.errorMessage = response.error.message;
           }
         });
       }

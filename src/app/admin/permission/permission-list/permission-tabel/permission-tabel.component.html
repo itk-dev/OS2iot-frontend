@@ -1,3 +1,9 @@
+@if (errorMessage) {
+  <div class="error-messages p-3 jumbotron">
+    <p class="line-break">{{ errorMessage | translate }}</p>
+  </div>
+}
+
 <div class="mat-elevation-z8">
   @if (isLoadingResults) {
     <div class="loading-shade">
@@ -22,8 +28,8 @@
             {{ element.name }}
           </a>
         } @else {
-        {{ element.name }}
-      }
+          {{ element.name }}
+        }
       </td>
     </ng-container>
 
@@ -48,8 +54,8 @@
             {{ element.users.length }}
           </div>
         } @else {
-        Ingen brugere er tilføjet
-      }
+          {{ "PERMISSION.NO_USER" | translate }}
+        }
       </td>
     </ng-container>
 
