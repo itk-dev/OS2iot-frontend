@@ -658,6 +658,7 @@
     "NUMBER_OF_MEMBERS": "Antal medlemmer",
     "TYPE": "Type af brugergruppe",
     "NO_ORGANISATION": "N/A",
+    "NO_USER": "Ingen brugere er tilføjet",
     "SAVE": "Gem brugergruppe",
     "DETAIL": {
       "TYPE": "Adgangstype ",
