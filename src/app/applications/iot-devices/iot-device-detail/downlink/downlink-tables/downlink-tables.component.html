@@ -53,7 +53,8 @@
       </button>
     </div>
   </div>
-} @if (device.type === 'LORAWAN') {
+}
+@if (device.type === 'LORAWAN') {
   <div class="jumbotron jumbotron--full-width">
     <h3 class="headerStyle">{{ "IOTDEVICE.DOWNLINK.HISTORICQUEUE" | translate }}</h3>
     <div class="mat-elevation-z8">
@@ -105,7 +106,7 @@
         <ng-container matColumnDef="fCntDown">
           <th *matHeaderCellDef mat-header-cell>{{ "IOTDEVICE.DOWNLINK.FRAMECOUNTER" | translate }}</th>
           <td *matCellDef="let element" mat-cell>
-            {{ element.fCntDown }}
+            {{ element.fCntDown ?? "-" }}
           </td>
         </ng-container>
         <!-- Acknowledged Column -->
