@@ -150,6 +150,7 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
         this.application.contactPerson = application.contactPerson;
         this.application.contactEmail = application.contactEmail;
         this.application.contactPhone = application.contactPhone;
+        this.application.contactPersons = application.contactPersons;
         this.phoneCtrl.setValue(application.contactPhone);
         this.application.personalData = application.personalData;
         this.application.hardware = application.hardware;
@@ -176,6 +177,18 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
     this.application.startDate = this.serializedStartDate.value?.toISOString();
     this.application.endDate = this.serializedEndDate.value?.toISOString();
     this.application.contactPhone = this.phoneCtrl.value ? this.phoneCtrl.value : null;
+
+    // @todo Improve this
+    for (const [index, contactPerson] of this.application.contactPersons.entries()) {
+      contactPerson.name ??= "";
+      contactPerson.role ??= "";
+      contactPerson.email ??= "";
+      contactPerson.phone ??= "";
+      if (!contactPerson.name || !contactPerson.email || !contactPerson.phone) {
+          this.handleError(this.buildErrorMessage("Each contact person must have a name, an email and a phone number"), "application.contactPersons["+index+"].name");
+          return;
+      }
+    }
 
     if (this.id) {
       this.updateApplication(this.id);
