@@ -10,6 +10,12 @@
       </ul>
     </div>
   }
+
+  <div class="row">
+    <h3>{{ "QUESTION.METADATA" | translate }}</h3>
+    <app-form-key-value-list [(tags)]="metadataTags" [errorFieldId]="errorMetadataFieldId"></app-form-key-value-list>
+  </div>
+
   <div class="row">
     <div class="form-group mt-3">
       <label class="form-label" for="name">{{ "GEN.NAME" | translate }}*</label>

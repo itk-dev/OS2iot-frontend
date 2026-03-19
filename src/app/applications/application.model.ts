@@ -37,6 +37,7 @@ export class Application {
   public permissions: PermissionResponse[];
   public permissionIds: number[];
   public dataTargets: Datatarget[];
+  public metadata?: string;
 }
 
 export class ApplicationRequest {
@@ -56,6 +57,7 @@ export class ApplicationRequest {
   public controlledProperties?: ControlledPropertyTypes[];
   public deviceTypes?: ApplicationDeviceTypeUnion[];
   public permissionIds: number[];
+  public metadata?: string;
 }
 
 export interface ApplicationData {
