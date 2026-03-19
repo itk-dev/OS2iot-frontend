@@ -17,6 +17,7 @@ import { isPhoneNumberValid } from "@shared/validators/phone-number.validator";
 import { ReplaySubject, Subject, Subscription } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 import { jsonToList } from "@shared/helpers/json.helper";
+import { keyValueListToMetadata, metadataToKeyValueList } from "@shared/helpers/metadata.helper";
 
 export class User {
   public name: string;
@@ -161,8 +162,10 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
         this.application.permissionIds = application.permissionIds;
         this.permissionMultiCtrl.setValue(this.application.permissionIds);
         if (application.metadata) {
-          this.metadataTags = jsonToList(application.metadata) ?? [];
+          this.metadataTags = metadataToKeyValueList(application.metadata) ?? [];
         }
+
+        console.debug(application.metadata, this.metadataTags);
 
         this.fillDefaultMetadata();
       });
@@ -183,18 +186,11 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
     this.application.endDate = this.serializedEndDate.value?.toISOString();
     this.application.contactPhone = this.phoneCtrl.value ? this.phoneCtrl.value : null;
 
-    // Lifted from IotDeviceEditComponent
-    if (this.metadataTags.length === 0) {
-      this.application.metadata = JSON.stringify({});
-    } else if (this.isMetadataSet()) {
-      const invalidKey = this.validateMetadata();
-
-      if (!invalidKey) {
-        this.setMetadata();
-      } else {
-        this.handleMetadataError(invalidKey);
-        return;
-      }
+    try {
+      this.application.metadata = keyValueListToMetadata(this.metadataTags);
+    } catch (error) {
+      this.handleError(this.buildErrorMessage(error.message), "application.metadata");
+      return;
     }
 
     if (this.id) {
@@ -311,49 +307,4 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
 
     this.formFailedSubmit = true;
   }
-
-  // Lifted from IotDeviceEditComponent
-  private isMetadataSet(): boolean {
-    return this.metadataTags.length && this.metadataTags.some(tag => tag.key && tag.value);
-  }
-
-  private validateMetadata(): string | undefined {
-    const seen = new Set();
-
-    for (const tag of this.metadataTags) {
-      if (seen.size === seen.add(tag.key).size) {
-        return tag.key;
-      }
-    }
-  }
-
-  private setMetadata(): void {
-    if (this.metadataTags.length && this.metadataTags.some(tag => tag.key && tag.value)) {
-      const metadata: Record<string, string> = {};
-      this.metadataTags.forEach(tag => {
-        if (!tag.key) {
-          return;
-        }
-        metadata[tag.key] = tag.value;
-      });
-      this.application.metadata = JSON.stringify(metadata);
-    }
-  }
-
-  private handleMetadataError(invalidKey: string) {
-    this.handleError({
-      error: {
-        message: [
-          {
-            field: "metadata",
-            message: "MESSAGE.DUPLICATE-METADATA-KEY",
-          },
-        ],
-      },
-    });
-    this.errorMetadataFieldId = invalidKey;
-    this.formFailedSubmit = true;
-  }
-
-  protected readonly JSON = JSON;
 }
