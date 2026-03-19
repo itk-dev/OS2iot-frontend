@@ -157,7 +157,8 @@
       "PERSONAL-DATA": "Persondata",
       "HARDWARE": "Hardware",
       "CONTROLLED-PROPERTY": "Data",
-      "DEVICE-TYPE": "Forbindelsesteknologi"
+      "DEVICE-TYPE": "Forbindelsesteknologi",
+      "METADATA": "Metadata"
     },
     "CHANGE-ORGANIZATION": {
       "TITLE": "Skift organisation",
