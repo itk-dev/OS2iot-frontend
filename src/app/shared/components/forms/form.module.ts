@@ -11,7 +11,7 @@ import { FormKeyValuePairComponent } from "./form-key-value/form-key-value-pair/
 import { FormKeyValueListComponent } from "./form-key-value/form-key-value-list/form-key-value-list.component";
 import { MatSelectSearchModule } from "@shared/components/mat-select-search/mat-select-search.module";
 import { ContactPersonEditComponent } from "@app/contact-person/contact-person-edit.component";
-import { ContactPersonListComponent } from "@app/contact-person/contact-person-list.component";
+import { ContactPersonListEditComponent } from "@app/contact-person/contact-person-list-edit.component";
 
 @NgModule({
   declarations: [
@@ -30,7 +30,7 @@ import { ContactPersonListComponent } from "@app/contact-person/contact-person-l
     NGMaterialModule,
     MatSelectSearchModule,
     ContactPersonEditComponent,
-    ContactPersonListComponent,
+    ContactPersonListEditComponent,
   ],
   exports: [FormHeaderComponent, FormBodyApplicationComponent, FormKeyValuePairComponent, FormKeyValueListComponent],
   providers: [],

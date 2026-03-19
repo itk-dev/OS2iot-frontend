@@ -1,6 +1,7 @@
 <div class="contact-persons">
   @for (contactPerson of contactPersons; track contactPerson) {
     <contact-person-edit [contactPerson]="contactPerson"
+                         [errorMessages]="errorMessages?.[$index]"
                          [index]="$index"
                          [removeContactPerson]="removeContactPerson($index, contactPerson)"/>
   }

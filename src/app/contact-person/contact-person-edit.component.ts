@@ -1,7 +1,7 @@
-import { Component, inject, Input, OnInit } from "@angular/core";
+import { Component, inject, Input } from "@angular/core";
 import { ContactPerson } from "@app/contact-person/contact-person.model";
 import { FormsModule } from "@angular/forms";
-import { _, TranslatePipe, TranslateService } from "@ngx-translate/core";
+import { TranslatePipe, TranslateService } from "@ngx-translate/core";
 import { NgClass } from "@angular/common";
 
 @Component({
@@ -14,6 +14,7 @@ export class ContactPersonEditComponent {
 
   // https://v17.angular.io/guide/component-interaction
   @Input() index!: number;
+  @Input() errorMessages: object;
   @Input() contactPerson: ContactPerson;
   @Input() removeContactPerson: () => void;
 
