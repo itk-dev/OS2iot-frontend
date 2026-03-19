@@ -1,6 +1,6 @@
 # Based on https://mherman.org/blog/dockerizing-an-angular-app/
 # base image
-FROM node:20-alpine AS DEV
+FROM node:20-alpine AS dev
 
 # removed this for now
 # install chrome for protractor tests
@@ -22,10 +22,9 @@ RUN npm install -g @angular/cli@20.3.7
 # add app
 COPY . /app
 
+EXPOSE 8080
+EXPOSE 8081
+
 # start app
-CMD ng serve --host 0.0.0.0
-
-
-FROM DEV as PROD
-CMD ng serve --host 0.0.0.0 --configuration=production
-
+# https://stackoverflow.com/questions/43492354/how-to-allow-access-outside-localhost
+CMD ["ng", "serve", "--host", "0.0.0.0", "--port", "8081", "--disable-host-check"]
