@@ -16,8 +16,9 @@ import { SharedVariableService } from "@shared/shared-variable/shared-variable.s
 import { isPhoneNumberValid } from "@shared/validators/phone-number.validator";
 import { ReplaySubject, Subject, Subscription } from "rxjs";
 import { takeUntil } from "rxjs/operators";
-import { jsonToList } from "@shared/helpers/json.helper";
 import { keyValueListToMetadata, metadataToKeyValueList } from "@shared/helpers/metadata.helper";
+import { TranslatableError } from "@shared/translatable-error";
+import { addWarning } from "@angular-devkit/build-angular/src/utils/webpack-diagnostics";
 
 export class User {
   public name: string;
@@ -189,7 +190,12 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
     try {
       this.application.metadata = keyValueListToMetadata(this.metadataTags);
     } catch (error) {
-      this.handleError(this.buildErrorMessage(error.message), "application.metadata");
+      let message = error.message;
+      if (error instanceof TranslatableError) {
+        // @todo Can we safely use `instant` here?
+        message = this.translate.instant(message, error.context);
+      }
+      this.handleError(this.buildErrorMessage(message), "application.metadata");
       return;
     }
 

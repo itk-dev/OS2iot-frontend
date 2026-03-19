@@ -1290,7 +1290,10 @@
     "USER-INACTIVE": "Login successfuldt, men din bruger er deaktiveret i OS2IoT. Kontakt din administrator for at få tildelt rettigheder"
   },
   "ERROR": {
-    "SEMANTIC": "Semantisk fejl, verificer at navn og værdier er på det rigtige format"
+    "SEMANTIC": "Semantisk fejl, verificer at navn og værdier er på det rigtige format",
+    "METADATA-EMPTY-KEY": "Metadatanavnet må ikke være tomt",
+    "METADATA-EMPTY-VALUE": "Metadataværdien for \"{{key}}\" må ikke være tom",
+    "METADATA-DUPLICATE-KEY": "Metadatanavnet \"{{key}}\" er allerede brugt"
   },
   "DIALOG": {
     "SAVE.TITLE": "Slet",

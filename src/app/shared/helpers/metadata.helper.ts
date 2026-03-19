@@ -1,5 +1,6 @@
 import { KeyValue } from "@shared/types/tuple.type";
 import { Metadata } from "@shared/types/metadata";
+import { TranslatableError } from "@shared/translatable-error";
 
 export const metadataToKeyValueList = (metadata: object, shouldThrowOnError = false): KeyValue[] => {
   try {
@@ -24,13 +25,12 @@ export const keyValueListToMetadata = (pairs: KeyValue[]): Metadata => {
     const key = pair.key?.trim();
     const value = pair.value?.trim();
     if (!key) {
-      throw new Error('Empty metadata key')
+      throw new TranslatableError("ERROR.METADATA-EMPTY-KEY");
+    } else if (key in metadata) {
+      throw new TranslatableError("ERROR.METADATA-DUPLICATE-KEY", { key });
     }
     if (!value) {
-      throw new Error("Empty metadata value for key "+key);
-    }
-    if (key in metadata) {
-      throw new Error("Duplicate metadata key: "+key)
+      throw new TranslatableError("ERROR.METADATA-EMPTY-VALUE", { key });
     }
     metadata[key] = value
   }
