@@ -3,6 +3,8 @@ import { ContactPerson } from "@app/contact-person/contact-person.model";
 import { _, TranslatePipe, TranslateService } from "@ngx-translate/core";
 import { FormsModule } from "@angular/forms";
 import { ContactPersonEditComponent } from "@app/contact-person/contact-person-edit.component";
+import { DeleteDialogComponent } from "@shared/components/delete-dialog/delete-dialog.component";
+import { MatDialog } from "@angular/material/dialog";
 
 @Component({
   selector: "contact-person-list-edit",
@@ -16,7 +18,7 @@ export class ContactPersonListEditComponent {
   @Input() contactPersons: ContactPerson[];
   @Input() errorMessages: object;
 
-  constructor() {}
+  constructor(private dialog: MatDialog) {}
 
   addContactPerson(): void {
     this.contactPersons.push(new ContactPerson());
@@ -27,13 +29,28 @@ export class ContactPersonListEditComponent {
       // Ask for confirmation before removing an existing contact person.
       if (contactPerson.id) {
         const message = this.translate
-          .get(_("APPLICATION.METADATA-FIELD.CONTACT-PERSONS-ACTION-REMOVE-CONFIRM"), {
+          .get([
+            _("APPLICATION.METADATA-FIELD.CONTACT-PERSONS-DELETE-CONFIRM"),
+            _("GEN.NO")
+          ], {
             name: contactPerson.name,
           })
-          .subscribe((message: string) => {
-            if (confirm(message)) {
-              this.contactPersons.splice(index, 1);
-            }
+          .subscribe((messages: string[]) => {
+            console.log({messages})
+            const dialog = this.dialog.open(DeleteDialogComponent, {
+              data: {
+                message: messages["APPLICATION.METADATA-FIELD.CONTACT-PERSONS-DELETE-CONFIRM"],
+                showAccept: true,
+                showCancel: true,
+                cancelText: messages["GEN.NO"],
+              },
+            });
+
+            dialog.afterClosed().subscribe(result => {
+              if (result === true) {
+                this.contactPersons.splice(index, 1);
+              }
+            });
           });
       } else {
         this.contactPersons.splice(index, 1);

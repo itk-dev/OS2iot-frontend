@@ -3,11 +3,13 @@ import { ContactPerson } from "@app/contact-person/contact-person.model";
 import { FormsModule } from "@angular/forms";
 import { TranslatePipe, TranslateService } from "@ngx-translate/core";
 import { NgClass } from "@angular/common";
+import { FaIconComponent } from "@fortawesome/angular-fontawesome";
+import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: "contact-person-edit",
   templateUrl: "./contact-person-edit.component.html",
-  imports: [TranslatePipe, FormsModule, NgClass],
+  imports: [TranslatePipe, FormsModule, NgClass, FaIconComponent],
 })
 export class ContactPersonEditComponent {
   private translate = inject(TranslateService);
@@ -19,4 +21,6 @@ export class ContactPersonEditComponent {
   @Input() removeContactPerson: () => void;
 
   constructor() {}
+
+  protected readonly faTimesCircle = faTimesCircle;
 }
