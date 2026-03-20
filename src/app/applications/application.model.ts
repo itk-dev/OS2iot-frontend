@@ -53,7 +53,7 @@ export class ApplicationRequest {
   public contactPerson?: string;
   public contactEmail?: string;
   public contactPhone?: string;
-  public contactPersons?: ContactPerson[];
+  public contactPersons?: ContactPerson[] = [];
   public personalData?: boolean;
   public hardware?: string;
   public controlledProperties?: ControlledPropertyTypes[];

@@ -172,7 +172,7 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
         this.application.contactPerson = application.contactPerson;
         this.application.contactEmail = application.contactEmail;
         this.application.contactPhone = application.contactPhone;
-        this.application.contactPersons = application.contactPersons;
+        this.application.contactPersons = application.contactPersons ?? [];
         this.phoneCtrl.setValue(application.contactPhone);
         this.application.personalData = application.personalData;
         this.application.hardware = application.hardware;
