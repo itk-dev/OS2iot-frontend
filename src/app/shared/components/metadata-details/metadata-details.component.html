@@ -53,38 +53,11 @@
 }
 
 @if (contactPersons.length > 0) {
-  <fieldset>
-    <legend>{{ "APPLICATION.METADATA-FIELD.CONTACT-PERSONS" | translate }}</legend>
-
-    @for (person of contactPersons; track person) {
-      <div class="person">
-        @if (person.name) {
-          <p>
-            <strong>{{ "APPLICATION.METADATA-FIELD.CONTACT-PERSON-NAME" | translate }}</strong
-            >{{ person.name }}
-          </p>
-        }
-        @if (person.role) {
-          <p>
-            <strong>{{ "APPLICATION.METADATA-FIELD.CONTACT-PERSON-ROLE" | translate }}</strong
-            >{{ person.role }}
-          </p>
-        }
-@if (person.email) {
-        <p>
-          <strong>{{ "APPLICATION.METADATA-FIELD.CONTACT-PERSON-EMAIL" | translate }}</strong
-          >{{ person.email }}
-        </p>
-      } @if (person.phone) {
-        <p>
-          <strong>{{ "APPLICATION.METADATA-FIELD.CONTACT-PERSON-PHONE" | translate }}</strong
-          >{{ person.phone }}
-        </p>
-      }
-      </div>
-    }
-
-  </fieldset>
+  <p>
+    <strong>{{ "APPLICATION.METADATA-FIELD.CONTACT-PERSONS" | translate }}</strong
+    >
+  </p>
+  <contact-person-list [contactPersons]="contactPersons"/>
 }
 
 <p>
