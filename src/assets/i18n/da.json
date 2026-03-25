@@ -156,6 +156,7 @@
       "CONTACT-PERSON": "Kontaktperson",
       "CONTACT-EMAIL": "Kontaktmail",
       "CONTACT-PHONE": "Kontakttelefon",
+      "CONTACT-PERSON-DEPRECATIONS": "Bemærk: Felterne \"Kontaktperson\", \"Kontaktmail\" og \"Kontakttelefon\" er under udfasning. Brug i stedet \"Kontaktpersoner\".",
       "PERSONAL-DATA": "Persondata",
       "HARDWARE": "Hardware",
       "CONTROLLED-PROPERTY": "Data",
