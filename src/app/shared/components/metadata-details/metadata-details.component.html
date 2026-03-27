@@ -71,17 +71,14 @@
 }
 
 @if (metadata) {
-  <h4>{{ "APPLICATION.METADATA-FIELD.METADATA" | translate }}</h4>
-
-  <table class="table">
-    <tbody>
-    {{ '' // @todo How can we iterate metadata (without using Object.keys }}
-      @for (key of Object.keys(metadata); track key) {
-        <tr>
-          <td>{{ key }}</td>
-          <td>{{ metadata[key]}}</td>
-        </tr>
-      }
-    </tbody>
-  </table>
+  <p>
+    <strong>{{ "APPLICATION.METADATA-FIELD.METADATA" | translate }}</strong
+    >
+  </p>
+  @for (key of Object.keys(metadata); track key; let i = $index) {
+    <p>
+      <strong>{{ i + 1 }}: {{ key }}</strong>
+      <span>{{ metadata[key] }}</span>
+    </p>
+  }
 }
