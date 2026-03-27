@@ -166,8 +166,6 @@ export class FormBodyApplicationComponent implements OnInit, OnDestroy {
           this.metadataTags = metadataToKeyValueList(application.metadata) ?? [];
         }
 
-        console.debug(application.metadata, this.metadataTags);
-
         this.fillDefaultMetadata();
       });
   }
